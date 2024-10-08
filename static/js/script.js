@@ -1,12 +1,12 @@
 let tent = 0
 let num = 0
 
-function numRandom(max){
-    num = Math.floor(Math.random() * max)
-
-    return num;
+function numRandom(min = 0,  max = 100){
+    let num = Math.random()
+    num = num * (max - min) + min
+    return Math.floor(num)
 }
-numRandom(100)
+let computer = numRandom(0, 100)
 
 while (tent < 5) {
     let indovin = prompt("Indovina il numero!")
@@ -27,5 +27,11 @@ while (tent < 5) {
 }
 alert("Hai perso! Il numero nascosto era:  " + num)
 
+let btn = document.querySelector("#guessBtn")
+
+function handleClick(event){
+    console.log(event)
+}  
+btn.addEventListener("click", handleClick)
 
 
