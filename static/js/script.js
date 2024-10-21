@@ -1,37 +1,41 @@
-let tent = 0
-let num = 0
+let tent = 5
+let n = 0
 
-function numRandom(min = 0,  max = 100){
-    let num = Math.random()
-    num = num * (max - min) + min
-    return Math.floor(num)
+function getRandom(min = 0, max = 100) {
+    n = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log(n)
+    return n;
 }
-let computer = numRandom(0, 100)
 
-while (tent < 5) {
-    let indovin = prompt("Indovina il numero!")
-    while (indovin === null || isNaN(indovin)) {
-        indovin = prompt("Indovina il numero!")
+function callback(event) {
+    let number = document.querySelector("[name=guess]")
+    let colpo = number.value
+
+    while(colpo === null || isNaN(colpo)) {
+        colpo = prompt("Idovina il numero!!!")
     }
     tent++
-    indovin = parseInt(indovin)
+    colpo = parseInt(colpo)
 
-    if (indovin == num) {
-        console.log("Hai vinto!")
-        tent = 5
-    } else if (indovin < num) {
-        console.log("Numero digitato: " + indovin, "/ Numero minore a quello nascosto. Tentativi rimasti: " + (5 - tent))
+    if(colpo == n) {
+        console.log("CONGRATURAZIONI! Hai vinto.")
+        tent = 0
+        msg.innerHTML = "WINNER"
+        alert("CONGRATURAZIONI! Hai vinto.")
+    } else if(colpo < n) {
+        console.log("Troppo piccolo. Tentativi rimasti: " + (5 - tent) + " | " + colpo)
+        msg.innerHTML = "Troppo piccolo. <br>Tentativi a disposizione: " + tent
     } else {
-        console.log("Numero digitato: " + indovin, "/ Numero maggiore a quello nascosto. Tentativi rimasti: " + (5 - tent))
+        console.log("Troppo grande.  Tentativi rimasti: " + (5 - tent) + " | " + colpo)
+        msg.innerHTML = "Troppo grande. <br>Tentativi a disposizione: " + tent
     }
 }
-alert("Hai perso! Il numero nascosto era:  " + num)
 
-let btn = document.querySelector("#guessBtn")
+getRandom(0, 100)
 
-function handleClick(event){
-    console.log(event)
-}  
-btn.addEventListener("click", handleClick)
-
-
+let msg = document.querySelector("#message")
+let button = document.querySelector("[type=button]")
+while(tent != 0) { 
+    button.addEventListener("click", callback)
+    tent = tent - 1
+}

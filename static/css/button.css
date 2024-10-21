@@ -1,0 +1,11 @@
+#guessBtn {
+    background-color: #3AE3A8;
+    color: black;
+    font-weight: bolder;
+    font-size: 24px;
+    text-align: center middle;
+    border-radius: 5px;
+    border: 0px;
+    width: 350px;
+    height: 60px;
+}
